@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+
 import "./globals.css";
+import Navbar from "@/components/navbar";
+import Sidebar from "@/components/sidebar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -27,9 +31,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={cn(
+          "bg-gray-100 antialiased",
+          geistSans.variable,
+          geistMono.variable
+        )}
       >
-        {children}
+        <div className="flex flex-wrap">
+          <Sidebar />
+          <Navbar />
+          <main>{children}</main>
+        </div>
       </body>
     </html>
   );
